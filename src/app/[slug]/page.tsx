@@ -2,12 +2,13 @@ import BlogDetail from '@/components/ui/blog-detail';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getBaseUrl } from '@/utils';
+import { IBlog } from '@/types';
 
 interface BlogPageProps {
   params: { slug: string };
 }
 
-async function fetchBlog(slug: string) {
+async function fetchBlog(slug: string): Promise<IBlog> {
   const baseUrl = getBaseUrl();
   const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
     cache: 'no-store',
@@ -33,7 +34,7 @@ export async function generateMetadata({
       url: `${getBaseUrl()}/blogs/${blog.slug}`,
       images: [
         {
-          url: blog.image || '/default-image.jpg',
+          url: blog.imageUrl || '/default-image.jpg',
           width: 800,
           height: 600,
           alt: blog.title,

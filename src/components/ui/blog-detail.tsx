@@ -2,9 +2,10 @@ import ReactMarkdown from 'react-markdown';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/tokyo-night-dark.css';
 import Image from 'next/image';
+import { IBlog } from '@/types';
 
 interface BlogDetailProps {
-  blog: any;
+  blog: IBlog;
 }
 
 const BlogDetail: React.FC<BlogDetailProps> = ({ blog }) => {

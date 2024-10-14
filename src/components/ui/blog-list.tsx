@@ -38,7 +38,7 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
             <h1 className='ellipsis-2-lines text-xl font-bold md:text-2xl lg:text-3xl xl:text-4xl'>
               {featuredBlog!.title}
             </h1>
-            <p className='ellipsis-3-lines text-sm text-gray-500 sm:text-xl'>
+            <p className='ellipsis-3-lines text-lg font-medium text-gray-500 sm:text-xl'>
               {featuredBlog!.description}
             </p>
             <div className='flex space-x-2'>
@@ -79,7 +79,9 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
               <h3 className='ellipsis-2-lines text-xl font-bold'>
                 {blog.title}
               </h3>
-              <p className='ellipsis-3-lines text-sm'>{blog.description}</p>
+              <p className='ellipsis-3-lines text-sm text-gray-500'>
+                {blog.description}
+              </p>
               <div className='flex space-x-2'>
                 {blog &&
                   blog.tags &&

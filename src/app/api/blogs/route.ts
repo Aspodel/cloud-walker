@@ -3,7 +3,7 @@ import DataService from '@/lib/data-service';
 
 const BlogService = DataService('blogs');
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const entities = await BlogService.get();
   return NextResponse.json(entities);
 }
