@@ -1,4 +1,3 @@
-// app/api/blogs/[slug]/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import DataService from '@/lib/data-service';
 

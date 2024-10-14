@@ -10,20 +10,26 @@ interface BlogPageProps {
 
 async function fetchBlog(slug: string): Promise<IBlog> {
   const baseUrl = getBaseUrl();
-  const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
-    cache: 'no-store',
-  });
-  if (!res.ok) {
+  try {
+    const res = await fetch(`${baseUrl}/api/blogs/${slug}`, {
+      cache: 'no-cache',
+    });
+    if (!res.ok) {
+      const errorText = await res.text();
+      console.error('Failed to fetch blog:', errorText);
+      notFound();
+    }
+    return res.json();
+  } catch (error) {
+    console.error('Fetch error:', error);
     notFound();
   }
-  return res.json();
 }
 
 export async function generateMetadata({
   params,
 }: BlogPageProps): Promise<Metadata> {
   const blog = await fetchBlog(params.slug);
-
   return {
     title: blog.title,
     description: blog.description,
