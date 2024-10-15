@@ -7,27 +7,22 @@ const DataService = <T extends Document>(collectionName: string) => {
     return client.db('CloudWalker_DB').collection(collectionName);
   };
 
-  const get = async () => {
+  const get = async (): Promise<T[]> => {
     const collection = await getCollection();
     const data = await collection.find({}).toArray();
-    return data.map((item) => {
-      const mappedItem: T = { ...item } as unknown as T;
-      return mappedItem;
-    });
+    return data.map(item => item as unknown as T);
   };
 
-  const getById = async (id: string) => {
+  const getById = async (id: string): Promise<T | null> => {
     const collection = await getCollection();
     const data = await collection.findOne({ _id: new ObjectId(id) });
-    const mappedData: T = { ...data } as unknown as T;
-    return mappedData;
+    return data ? (data as unknown as T) : null;
   };
 
-  const getBySlug = async (slug: string) => {
+  const getBySlug = async (slug: string): Promise<T | null> => {
     const collection = await getCollection();
     const data = await collection.findOne({ slug });
-    const mappedData: T = { ...data } as unknown as T;
-    return mappedData;
+    return data ? (data as unknown as T) : null;
   };
 
   const create = async (data: T): Promise<void> => {
