@@ -4,10 +4,9 @@ export const joinClassNames = (...classes: string[]) => {
 
 export function getBaseUrl() {
   if (typeof window !== 'undefined') {
-    // Client-side
-    return '';
+    return window.location.origin;
   }
-  // Server-side
-  const host = process.env.VERCEL_URL || 'localhost:3000';
-  return `http${host.includes('localhost') ? '' : 's'}://${host}`;
+  return process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : 'http://localhost:3000';
 }
