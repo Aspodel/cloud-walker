@@ -3,20 +3,19 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getBaseUrl } from '@/utils';
 import { IBlog } from '@/types';
+import DataService from '@/lib/data-service';
 
 interface BlogPageProps {
   params: { slug: string };
 }
 
 async function getBlog(slug: string): Promise<IBlog> {
-  const res = await fetch(`${getBaseUrl()}/api/blogs/${slug}`, {
-    cache: 'no-store',
-  });
-  if (!res.ok) {
-    console.error('Failed to get blog:', res.statusText);
-    notFound();
+  const BlogService = DataService<IBlog>('blogs');
+  const blog = await BlogService.getBySlug(slug);
+  if (!blog) {
+    throw notFound();
   }
-  return res.json();
+  return blog;
 }
 
 export async function generateMetadata({
