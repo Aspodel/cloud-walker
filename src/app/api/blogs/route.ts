@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import DataService from '@/lib/data-service';
+import { IBlog } from '@/types';
 
-const BlogService = DataService('blogs');
+const BlogService = DataService<IBlog>('blogs');
 
 export async function GET() {
   try {

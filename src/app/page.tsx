@@ -1,15 +1,10 @@
 import BlogList from '@/components/ui/blog-list';
+import DataService from '@/lib/data-service';
 import { IBlog } from '@/types';
-import { getBaseUrl } from '@/utils';
-
-async function getBlogs() {
-  const res = await fetch(`${getBaseUrl()}/api/blogs`, { cache: 'no-store' });
-  const blogs: IBlog[] = await res.json();
-
-  return blogs;
-}
 
 export default async function HomePage() {
-  const blogs = await getBlogs();
+  const BlogService = DataService<IBlog>('blogs');
+  const blogs = await BlogService.get();
+
   return <BlogList blogs={blogs} />;
 }

@@ -79,7 +79,7 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
               <h3 className='ellipsis-2-lines text-xl font-bold'>
                 {blog.title}
               </h3>
-              <p className='ellipsis-3-lines text-sm text-gray-500'>
+              <p className='ellipsis-3-lines text-sm text-gray-500 sm:text-base'>
                 {blog.description}
               </p>
               <div className='flex space-x-2'>
